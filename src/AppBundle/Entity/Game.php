@@ -31,7 +31,7 @@ class Game
     /**
      * @var int
      *
-     * @ORM\Column(name="game_state_id", type="integer")
+     * @ORM\Column(name="game_state_id", type="integer", options={"default" : 1})
      */
     private $gameStateId;
 
@@ -45,9 +45,34 @@ class Game
     /**
      * @var int
      *
-     * @ORM\Column(name="_decision_type_id", type="integer")
+     * @ORM\Column(name="computer_decision_type_id", type="integer")
      */
     private $computerDecisionTypeId;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="user_id", type="integer", options={"default" : null})
+     */
+    private $userId;
+
+    /**
+     * @ORM\OneToOne(targetEntity="DecisionType")
+     * @ORM\JoinColumn(name="opponent_decision_type_id", referencedColumnName="id")
+     */
+    protected $opponentDecision;
+
+    /**
+     * @ORM\OneToOne(targetEntity="DecisionType")
+     * @ORM\JoinColumn(name="computer_decision_type_id", referencedColumnName="id")
+     */
+    protected $computerDecision;
+
+    /**
+     * @ORM\OneToOne(targetEntity="GameState")
+     * @ORM\JoinColumn(name="game_state_id", referencedColumnName="id")
+     */
+    protected $state;
 
     /**
      * Get id
@@ -106,5 +131,24 @@ class Game
     {
         return $this->gameStateId;
     }
-}
 
+    /**
+     * Retrieves the GameDecisionType Entity picked by the user.
+     *
+     * @return  GameDecisionType The Game Decision
+     */
+    public function getOpponentDecision()
+    {
+        return $this->opponentDecision;
+    }
+
+    /**
+     * Retrieves the GameDecisionType Entity picked by the computer.
+     *
+     * @return  GameDecisionType The Game Decision Teypic
+     */
+    public function getComputerDecision()
+    {
+        return $this->computerDecision;
+    }
+}
