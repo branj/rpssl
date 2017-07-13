@@ -13,6 +13,26 @@ use Doctrine\ORM\Mapping as ORM;
 class GameState
 {
     /**
+     * @var int The id that represent the game has yet to be evaluated.
+     */
+    const UNRESOLVED = 1;
+
+    /**
+     * @var int The id that represent the game has been evaluated and the opponenet won.
+     */
+    const OPPONENT_WON = 2;
+
+    /**
+     * @var int The id that represent the game has been evaluated and the computer won.
+     */
+    const COMPUTER_WON = 3;
+
+    /**
+     * @var int The id that represent the game has been evaluated and was a draw.
+     */
+    const DRAW = 4;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")

@@ -13,6 +13,31 @@ use Doctrine\ORM\Mapping as ORM;
 class DecisionType
 {
     /**
+     * @var Decision type of Rock
+     */
+    const ROCK = 1;
+
+    /**
+     * @var Decision type of Paper
+     */
+    const PAPER = 2;
+
+    /**
+     * @var Decision type of Scissors
+     */
+    const SCISSORS = 3;
+
+    /**
+     * @var Decision type of Spock
+     */
+    const SPOCK = 4;
+
+    /**
+     *  @var Decision type of Lizard
+     */
+    const LIZARD = 5;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -61,6 +86,21 @@ class DecisionType
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Though we have this in the DB we still want to enforce the choices as the logic of DecisionType is somewhat ridgid.
+     * @return  int The number of choices
+     */
+    public static function numberOfDecisions()
+    {
+        return count([
+            self::ROCK,
+            self::PAPER,
+            self::SCISSORS,
+            self::SPOCK,
+            self::LIZARD,
+        ]);
     }
 }
 
