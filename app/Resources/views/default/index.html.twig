@@ -2,19 +2,10 @@
 
 {% block body %}
     
-    {# Status User To Result Of Last Game #}
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="flash-{{ label }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
-
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
-                <h1>What say you?</h1>
+                <h1>ROCK PAPER SCISSORS SPOCK LIZARD</h1>
             </div>
 
             <div id="status">
@@ -26,10 +17,16 @@
             </div>
 
             <div id="next">
-                <h2>What's next?</h2>
-                <p>
-                   
-                </p>
+                {# Status User To Result Of Last Game #}
+                {% if app.request.hasPreviousSession %}
+                    {% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="flash flash-{{ label }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
             </div>
 
         </div>
@@ -52,8 +49,11 @@
     #welcome h1 span { display: block; font-size: 75%; }
     #icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
     #icon-book { display: none; }
-    .flash-success{color: green;}
-    .flash-fail{color: red;}
+    .flash{width:100%;color:white;text-align:center;}
+    .flash-success{background: green;}
+    .flash-warning{background: red;}
+    .flash-notice{background: yellow;}
+
     @media (min-width: 768px) {
         #wrapper { width: 80%; margin: 2em auto; }
         #icon-book { display: inline-block; }
