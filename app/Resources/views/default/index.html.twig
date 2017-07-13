@@ -28,7 +28,112 @@
                     {% endfor %}
                 {% endif %}
             </div>
-
+            <br/>
+            <table id='statsTable'>
+                <thead>
+                    <th>
+                        
+                    </th>
+                    <th>
+                        Player
+                    </th>
+                    <th>
+                        Computer
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                </thead>
+                <tr>
+                    <td>
+                        Total Wins
+                    </td>
+                    <td>
+                        {{stats.getWins(true, false)}}
+                    </td>
+                    <td>
+                        {{stats.getWins(false, true)}}
+                    </td>
+                    <td>
+                        {{stats.getWins()}}
+                    </td>
+                </tr>
+                <tr>
+                    <td class='divider' colspan="4">
+                        Decision Breakdown
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Rock Thrown
+                    </td>
+                    <td>
+                        {{stats.getDecisions(constant('AppBundle\\Entity\\DecisionType::ROCK'), true, false)}}
+                    </td>
+                    <td>
+                        {{stats.getDecisions(constant('AppBundle\\Entity\\DecisionType::ROCK'), false, true)}}
+                    </td>
+                    <td>
+                        {{stats.getDecisions(constant('AppBundle\\Entity\\DecisionType::ROCK'), true, true)}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Paper Thrown
+                    </td>
+                    <td>
+                        {{stats.getDecisions(constant('AppBundle\\Entity\\DecisionType::PAPER'), true, false)}}
+                    </td>
+                    <td>
+                        {{stats.getDecisions(constant('AppBundle\\Entity\\DecisionType::PAPER'), false, true)}}
+                    </td>
+                    <td>
+                        {{stats.getDecisions(constant('AppBundle\\Entity\\DecisionType::PAPER'), true, true)}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Scissors Thrown
+                    </td>
+                    <td>
+                        {{stats.getDecisions(constant('AppBundle\\Entity\\DecisionType::SCISSORS'), true, false)}}
+                    </td>
+                    <td>
+                        {{stats.getDecisions(constant('AppBundle\\Entity\\DecisionType::SCISSORS'), false, true)}}
+                    </td>
+                    <td>
+                        {{stats.getDecisions(constant('AppBundle\\Entity\\DecisionType::SCISSORS'), true, true)}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Spock Thrown
+                    </td>
+                    <td>
+                        {{stats.getDecisions(constant('AppBundle\\Entity\\DecisionType::SPOCK'), true, false)}}
+                    </td>
+                    <td>
+                        {{stats.getDecisions(constant('AppBundle\\Entity\\DecisionType::SPOCK'), false, true)}}
+                    </td>
+                    <td>
+                        {{stats.getDecisions(constant('AppBundle\\Entity\\DecisionType::SPOCK'), true, true)}}
+                    </td>
+                </tr>
+                 <tr>
+                    <td>
+                        Lizard Thrown
+                    </td>
+                    <td>
+                        {{stats.getDecisions(constant('AppBundle\\Entity\\DecisionType::LIZARD'), true, false)}}
+                    </td>
+                    <td>
+                        {{stats.getDecisions(constant('AppBundle\\Entity\\DecisionType::LIZARD'), false, true)}}
+                    </td>
+                    <td>
+                        {{stats.getDecisions(constant('AppBundle\\Entity\\DecisionType::LIZARD'), true, true)}}
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 {% endblock %}
@@ -47,13 +152,13 @@
     #container { padding: 2em; }
     #welcome, #status { margin-bottom: 2em; }
     #welcome h1 span { display: block; font-size: 75%; }
-    #icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
-    #icon-book { display: none; }
+    #statsTable{width:100%;}
+    #statsTable th{text-align:left;}
     .flash{width:100%;color:white;text-align:center;}
     .flash-success{background: green;}
     .flash-warning{background: red;}
     .flash-notice{background: yellow;}
-
+    .divider{padding:2px; background:lightgray;color:white;font-size:10px;}
     @media (min-width: 768px) {
         #wrapper { width: 80%; margin: 2em auto; }
         #icon-book { display: inline-block; }

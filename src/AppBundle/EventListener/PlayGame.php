@@ -7,6 +7,7 @@ use AppBundle\Entity\Game;
 use AppBundle\Entity\GameState;
 use AppBundle\Entity\DecisionType;
 use AppBundle\Service\GameLogic;
+use AppBundle\Service\GameStatistics;
 
 /**
  * Listens for Game Doctrine events to handle playing the game.
@@ -39,5 +40,8 @@ class PlayGame
         $gameStateId = GameLogic::run($game);
         $gameState = $em->getRepository(GameState::class)->find($gameStateId);
         $game->setState($gameState);
+
+        //Update statistics of the game.
+        GameStatistics::update($game);
     }
 }

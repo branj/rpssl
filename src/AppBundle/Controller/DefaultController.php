@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use AppBundle\Form\GameType;
 use AppBundle\Entity\Game;
 use AppBundle\Entity\GameState;
+use AppBundle\Service\GameStatistics;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class DefaultController extends Controller
@@ -47,7 +48,7 @@ class DefaultController extends Controller
             //The state of the game will tell us who won.
             $state = $game->getState();
 
-            //Same the game to the user's session so they can browse statistics.
+            //Same the game to the user's session so we remember.
             $previousGames[] = $game->getId();
             $session->set(self::SESSION_INDEX, $previousGames);
 
@@ -74,7 +75,7 @@ class DefaultController extends Controller
 
         return $this->render('default/index.html.twig', [
             'form' => $form->createView(),
-            'games' => $previousGames
+            'stats' => new GameStatistics()
         ]);
     }
 }
