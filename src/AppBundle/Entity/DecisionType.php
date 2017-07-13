@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,6 +56,25 @@ class DecisionType
 
 
     /**
+     * @ORM\OneToMany(targetEntity="Game", mappedBy="opponentDecision")
+     */
+    private $opponetDecisions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Game", mappedBy="opponentDecision")
+     */
+    private $computerDecisions;
+
+    /**
+     * Ensure we set up the mapping correctly.
+     */
+    public function __construct()
+    {
+        $this->opponetDecisions = new ArrayCollection();
+        $this->computerDecisions = new ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return int
@@ -103,4 +123,3 @@ class DecisionType
         ]);
     }
 }
-

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * GameState
@@ -48,6 +49,18 @@ class GameState
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Game", mappedBy="state")
+     */
+    private $games;
+
+    /**
+     * Ensure we set up the mapping correctly.
+     */
+    public function __construct()
+    {
+        $this->games = new ArrayCollection();
+    }
 
     /**
      * Get id

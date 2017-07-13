@@ -31,17 +31,22 @@ class Game
 
 
     /**
-     * @ORM\OneToOne(targetEntity="DecisionType")
+     * @ORM\ManyToOne(targetEntity="DecisionType")
      * @ORM\JoinColumn(name="opponent_decision_type_id", referencedColumnName="id")
      */
     protected $opponentDecision;
 
     /**
-     * @ORM\OneToOne(targetEntity="DecisionType")
+     * @ORM\ManyToOne(targetEntity="DecisionType")
      * @ORM\JoinColumn(name="computer_decision_type_id", referencedColumnName="id")
      */
     protected $computerDecision;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="GameState")
+     * @ORM\JoinColumn(name="game_state_id", referencedColumnName="id")
+     */
+    protected $state;
 
     /**
      * Get id
@@ -124,13 +129,5 @@ class Game
     public function getComputerDecision()
     {
         return $this->opponentDecision;
-    }
-
-    /**
-     * Evaluates the opponent's choice against the computers.
-     */
-    public function evaluate() 
-    {
-        return true;
     }
 }
