@@ -1,6 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    
+    {# Status User To Result Of Last Game #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
@@ -9,14 +19,9 @@
 
             <div id="status">
                 <p>
-                    <form method='post' action="/challenge">
-                        <select name='opponentDecisionTypeId'>
-                            {% for decisionType in decisionTypes %}
-                                <option value="{{decisionType.id}}">{{decisionType.name}}</option>
-                            {% endfor %}
-                        </select>
-                        <input type="submit" value="Shoot!" />
-                    </form>
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
                 </p>
             </div>
 
@@ -47,7 +52,8 @@
     #welcome h1 span { display: block; font-size: 75%; }
     #icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
     #icon-book { display: none; }
-
+    .flash-success{color: green;}
+    .flash-fail{color: red;}
     @media (min-width: 768px) {
         #wrapper { width: 80%; margin: 2em auto; }
         #icon-book { display: inline-block; }
