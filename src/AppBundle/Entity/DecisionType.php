@@ -107,19 +107,4 @@ class DecisionType
     {
         return $this->name;
     }
-
-    /**
-     * Though we have this in the DB we still want to enforce the choices as the logic of DecisionType is somewhat ridgid.
-     * @return  int The number of choices
-     */
-    public static function numberOfDecisions()
-    {
-        return count([
-            self::ROCK,
-            self::PAPER,
-            self::SCISSORS,
-            self::SPOCK,
-            self::LIZARD,
-        ]);
-    }
 }

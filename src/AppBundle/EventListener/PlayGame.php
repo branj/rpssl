@@ -6,6 +6,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use AppBundle\Entity\Game;
 use AppBundle\Entity\GameState;
 use AppBundle\Entity\DecisionType;
+use AppBundle\Service\GameLogic;
 
 /**
  * Listens for Game Doctrine events to handle playing the game.
@@ -26,12 +27,17 @@ class PlayGame
             return;
         }
 
+        //Let's get a random decision for the computer.
         $em = $args->getEntityManager();
-        $decision = $em->getRepository(DecisionType::class)->find(rand(1, DecisionType::numberOfDecisions()));
+        $decision = $em->getRepository(DecisionType::class)->find(GameLogic::getRandomDecision());
 
+        //Set the computer decision
         $game->setComputerDecision($decision);
         $game->setCreatedAt(new \DateTime());
 
-        $objectManager = $args->getObjectManager();
+        //Let the logic Service give us a judgement.
+        $gameStateId = GameLogic::run($game);
+        $gameState = $em->getRepository(GameState::class)->find($gameStateId);
+        $game->setState($gameState);
     }
 }
