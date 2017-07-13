@@ -95,5 +95,40 @@ class GameState
     {
         return $this->name;
     }
-}
 
+    /**
+     * Is this a win?
+     * @return  bool True if this is a win, False if not
+     */
+    public function isAWin()
+    {
+        return $this->getId() == self::OPPONENT_WON;
+    }
+
+    /**
+     * Is this a loss (computer won)?
+     * @return  bool True if this is a loss, False if not
+     */
+    public function isALoss()
+    {
+        return $this->getId() == self::COMPUTER_WON;
+    }
+
+    /**
+     * Is this a draw?
+     * @return  bool True if this is a draw, False if not
+     */
+    public function isADraw()
+    {
+        return $this->getId() == self::DRAW;
+    }
+
+    /**
+     * Is this unresolved?
+     * @return  bool True if this is unresolved, False if not
+     */
+    public function isUnresolved()
+    {
+        return $this->getId() == self::UNRESOLVED;
+    }
+}
