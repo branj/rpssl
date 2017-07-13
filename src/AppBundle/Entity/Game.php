@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Game
@@ -28,33 +29,6 @@ class Game
      */
     private $createdAt;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="game_state_id", type="integer", options={"default" : 1})
-     */
-    private $gameStateId;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="opponent_decision_type_id", type="integer")
-     */
-    private $opponentDecisionTypeId;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="computer_decision_type_id", type="integer")
-     */
-    private $computerDecisionTypeId;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="user_id", type="integer", options={"default" : null})
-     */
-    private $userId;
 
     /**
      * @ORM\OneToOne(targetEntity="DecisionType")
@@ -68,11 +42,6 @@ class Game
      */
     protected $computerDecision;
 
-    /**
-     * @ORM\OneToOne(targetEntity="GameState")
-     * @ORM\JoinColumn(name="game_state_id", referencedColumnName="id")
-     */
-    protected $state;
 
     /**
      * Get id
@@ -108,34 +77,25 @@ class Game
         return $this->createdAt;
     }
 
+
     /**
-     * Set gameStateId
+     * Set opponents DecisionType
      *
-     * @param integer $gameStateId
+     * @param DecisionType $decision
      *
      * @return Game
      */
-    public function setGameStateId($gameStateId)
+    public function setOpponentDecision(DecisionType $decision)
     {
-        $this->gameStateId = $gameStateId;
+        $this->opponentDecision = $decision;
 
         return $this;
     }
 
     /**
-     * Get gameStateId
+     * Get opponent's DecisionType
      *
      * @return int
-     */
-    public function getGameStateId()
-    {
-        return $this->gameStateId;
-    }
-
-    /**
-     * Retrieves the GameDecisionType Entity picked by the user.
-     *
-     * @return  GameDecisionType The Game Decision
      */
     public function getOpponentDecision()
     {
@@ -143,12 +103,34 @@ class Game
     }
 
     /**
-     * Retrieves the GameDecisionType Entity picked by the computer.
+     * Set computer's DecisionType
      *
-     * @return  GameDecisionType The Game Decision Teypic
+     * @param DecisionType $decision
+     *
+     * @return Game
+     */
+    public function setComputerDecision(DecisionType $decision)
+    {
+        $this->computerDecision = $decision;
+
+        return $this;
+    }
+
+    /**
+     * Get computers's DecisionType
+     *
+     * @return int
      */
     public function getComputerDecision()
     {
-        return $this->computerDecision;
+        return $this->opponentDecision;
+    }
+
+    /**
+     * Evaluates the opponent's choice against the computers.
+     */
+    public function evaluate() 
+    {
+        return true;
     }
 }
