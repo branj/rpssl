@@ -100,7 +100,7 @@ class Game
     /**
      * Get opponent's DecisionType
      *
-     * @return int
+     * @return DecisionType
      */
     public function getOpponentDecision()
     {
@@ -124,10 +124,34 @@ class Game
     /**
      * Get computers's DecisionType
      *
-     * @return int
+     * @return DecisionType
      */
     public function getComputerDecision()
     {
-        return $this->opponentDecision;
+        return $this->computerDecision;
+    }
+
+    /**
+     * Set computer's DecisionType
+     *
+     * @param GameState $gameState
+     *
+     * @return Game
+     */
+    public function setState(GameState $gameState)
+    {
+        $this->state = $gameState;
+
+        return $this;
+    }
+
+    /**
+     * Return's the state of the game
+     *
+     * @return GameState
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 }
